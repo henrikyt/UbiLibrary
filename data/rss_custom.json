@@ -1,0 +1,62 @@
+[
+    {
+        "title": "Tervetuloa kirjastoon!",
+        "start": "2013-09-17T12:56:13+03:00",
+        "end": "",
+        "url": "",
+        "description": "",
+        "location": "",
+        "image": "",
+        "background": "http:\/\/www.outikirjastot.fi\/UBI\/nuoret_ubi.jpg",
+        "id": "5238273d0aa39",
+        "cost": "",
+        "allDay": false,
+        "noEnd": false,
+        "remove": "2013-09-17T12:56:13+03:00"
+    },
+    {
+        "title": " ",
+        "start": "2013-10-04T13:35:58+03:00",
+        "end": "",
+        "url": "",
+        "description": "",
+        "location": "",
+        "image": "",
+        "background": "http:\/\/www.outikirjastot.fi\/UBI\/verkkokirjasto_ubi.jpg",
+        "id": "524e9a0e84212",
+        "cost": "",
+        "allDay": false,
+        "noEnd": false,
+        "remove": "2013-10-04T13:35:58+03:00"
+    },
+    {
+        "title": " ",
+        "start": "2013-10-04T13:37:16+03:00",
+        "end": "",
+        "url": "",
+        "description": "",
+        "location": "",
+        "image": "",
+        "background": "http:\/\/www.outikirjastot.fi\/UBI\/OUTI-kirjastot_ubi.jpg",
+        "id": "524e9a5c85ade",
+        "cost": "",
+        "allDay": false,
+        "noEnd": false,
+        "remove": "2013-10-04T13:37:16+03:00"
+    },
+    {
+        "title": " ",
+        "start": "2013-10-21T15:20:18+03:00",
+        "end": "",
+        "url": "",
+        "description": "",
+        "location": "",
+        "image": "",
+        "background": "http:\/\/www.outikirjastot.fi\/UBI\/maksu.jpg",
+        "id": "52651c020aa41",
+        "cost": "",
+        "allDay": false,
+        "noEnd": false,
+        "remove": "2013-10-21T15:20:18+03:00"
+    }
+]

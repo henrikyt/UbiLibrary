@@ -1,0 +1,57 @@
+a{
+    text-decoration: none;
+}
+
+body{
+    font-family: sans-serif;
+    padding: 50px;
+    background: white;
+}
+h1{
+    font-size: 30px;
+    font-family: fantasy;
+    font-weight: lighter;
+    color: rgb(130, 189, 26);
+}
+
+h2{
+    font-size: 20px;
+    font-family: fantasy;
+    font-weight: lighter;
+    color: #005580;
+}
+
+h3{
+    font-size: 30px;
+    font-family: fantasy;
+    color: #005580;
+}
+
+button{
+    padding: 10px;
+    display: inline;
+}
+
+input[type=text]{
+    width: 400px;
+}
+
+.ui-title{
+    font-family: fantasy;
+    font-weight: lighter;
+    color: rgb(130, 189, 26);
+}
+.ui-news-title{
+    font-family: fantasy;
+    font-weight: lighter;
+    color: white;
+    background-color: rgb(130, 189, 26);
+}
+
+#description{
+    height: 200px;
+    width: 400px;
+    text-align: start;
+    vertical-align: top;
+    word-break: break-all;
+}

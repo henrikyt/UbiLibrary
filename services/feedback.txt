@@ -1,0 +1,31 @@
+Kirjaston UBIn palautekysely
+
+
+
+Sun, 10 Nov 2013 12:51:07 +0000
+
+Sun, 10 Nov 2013 16:55:25 +0000
+Kirjaston_palvelut_1-5?
+5;
+
+Sun, 10 Nov 2013 17:17:10 +0000
+Kirjaston_palvelut_1-5?
+4;
+Lähetä_palautetta_kirjaston_palveluista:
+dd
+Lähetä_palautetta_tämän_Ubi-näytön_sovelluksista:
+asdafewqf
+
+Sun, 10 Nov 2013 17:42:11 +0000
+Kirjaston_palvelut_1-5?
+4;
+
+Sun, 10 Nov 2013 17:42:19 +0000
+Kirjaston_palvelut_1-5?
+5;
+
+Sun, 10 Nov 2013 17:42:25 +0000
+Kirjaston_palvelut_1-5?
+5;
+
+Sun, 10 Nov 2013 17:42:29 +0000

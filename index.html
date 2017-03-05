@@ -1,0 +1,598 @@
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<html>
+<head>
+    <title>
+        Oulun kaupunginkirjaston UBI
+    </title>
+
+    <link rel="stylesheet" href="styles/jquery-ui/gray/jquery-ui.css"/>
+    <link id="theme_jquery" rel="stylesheet" href=""/>
+    <link rel="stylesheet" href="styles/keyboard.css"/>
+    <link rel="stylesheet" href="styles/fullcalendar.css"/>
+    <link rel="stylesheet" href="styles/cloud.css"/>
+    <link rel="stylesheet" href="styles/clock.css"/>
+    <link rel="stylesheet" href="styles/slides.css"/>
+    <link rel="stylesheet" href="styles/map.css"/>
+    <link rel="stylesheet" href="styles/main.css"/>
+    <link id="theme" rel="stylesheet" href="styles/theme_gray.css"/>
+
+    <script type="text/javascript" src="scripts/lib/jquery/jquery-2.0.2.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/jquery/jquery.watch.js"></script>
+    <script type="text/javascript" src="scripts/lib/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/jquery/bjqs-1.3.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/jquery/jquery.keyboard.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/jquery/jquery.transform2d.js"></script>
+    <script type="text/javascript" src="scripts/lib/jquery/swedish.js"></script>
+    <script type="text/javascript" src="scripts/lib/d3/d3.v3.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/d3/d3.layout.cloud.js"></script>
+    <script type="text/javascript" src="scripts/lib/d3/highlight.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/jquery/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/jquery/gcal.js"></script>
+    <script type="text/javascript" src="scripts/lib/stomp.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC4-aMKgvTe-Mmyr0okQF286vZfpJ7S_F0&sensor=false"></script>
+
+    <script type="text/javascript" src="scripts/session.js"></script>
+    <script type="text/javascript" src="scripts/prototypes.js"></script>
+    <script type="text/javascript" src="scripts/variables.js"></script>
+    <script type="text/javascript" src="scripts/startup.js"></script>
+    <script type="text/javascript" src="scripts/calendar.js"></script>
+    <script type="text/javascript" src="scripts/clock.js"></script>
+    <script type="text/javascript" src="scripts/functions.js"></script>
+    <script type="text/javascript" src="scripts/map.js"></script>
+
+</head>
+<body>
+
+<div id=blocker></div>
+
+
+<div id="subtle">
+    <div id="subtle_container">
+        <div id="subtle_covers">
+            <ul id="subtle_slider" class="bjqs"></ul>
+        </div>
+    </div>
+    <div class="subtle-title">
+        <h1>KOSKETA MINUA</h1>
+
+        <h2>niin saat vinkkejä kirjoista, kirjaston palveluista sekä Oulun tapahtumista</h2>
+    </div>
+</div>
+
+
+<!-- POPUPS -->
+<div id="cloud_confirm">
+    <p>Haluatko poistaa hausta jo valitut hakusanat, jolloin haetaan vain tällä hakusanalla, vai lisätä tämän hakusanan
+        muiden joukkoon, jolloin haetaan kaikilla valituilla hakusanoilla?</p>
+</div>
+<div id="feedback_confirm">
+    <p>Haluatko lähettää antamasi palautteen?</p>
+</div>
+<div id="popup_big"></div>
+<div id="popup_small"></div>
+<div id="reviews_popup"></div>
+<div id="calendar_popup"></div>
+<div id="tag_popup"></div>
+<div id="location_popup">
+    <div>
+        <img src="files/pic/2krs.jpg"/>
+
+        <div id="location_marker"></div>
+
+        <div id="location_desc"></div>
+    </div>
+</div>
+<div id="helper_popup">
+    <div style="height: 630px !important" class="menu-container-large overflow">
+        <div id="helper_cal" onclick="$('#helper_popup').dialog('close');animateMenu($('#element1'))"></div>
+        <div id="helper_loc" onclick="$('#helper_popup').dialog('close');animateMenu($('#element4'))"></div>
+        <h2 class='ui-title'>Kokeile hakea kirjaa jollain näistä asiasanoista</h2>
+
+        <div id="helper_tags"></div>
+    </div>
+    <div style="height: 650px !important;left:750px !important" class="main-container-large overflow">
+        <div id="helper_main"></div>
+    </div>
+</div>
+
+<!-- PROGRESSBAR -->
+<div id="progress">
+    <div id="progress_text"></div>
+</div>
+
+<div id="bg_full">
+    <div id="bg"></div>
+</div>
+
+<!-- MAIN SCREEN -->
+<div id="container">
+<div id="main_menu" class="main">
+    <div id="main_block" onclick="event.stopPropagation();"></div>
+</div>
+<div id="menu">
+    <!-- THEMES -->
+    <div id="themes">
+        <div title="Vaihda teemaksi harmaa" onclick="changeTheme('gray')" style="background: #4b4b4b"></div>
+        <div title="Vaihda teemaksi sininen" onclick="changeTheme('blue')" style="background: #0076BD"></div>
+        <div title="Vaihda teemaksi oranssi" onclick="changeTheme('orange')" style="background: #EC7405"></div>
+        <div title="Vaihda teemaksi vihreä" onclick="changeTheme('green')" style="background: #7AB51D"></div>
+    </div>
+    <!-- LOGOS -->
+    <div id="logos">
+        <div class="logo-break"></div>
+        <!--   <div id="logo_ubi" title="Tämä sovellus on osa UBI-portaalia"></div>  -->
+        <div id="logo_sampo" title="Kirjojen informaatio noudetaan KirjaSammosta (www.kirjasampo.fi)"></div>
+        <div id="logo_gb" title="Kirjojen haussa käytetään myös Google Books-palvelua (www.books.google.com)"></div>
+        <div id="logo_gr"
+             title="Kirjojen arvostelut sekä pisteytykset saadaan Goodreads-palvelusta (www.goodreads.com)"></div>
+        <div id="logo_outi" title="Yhteistyössä Oulun kaupunginkirjasto (www.ouka.fi/oulu/kirjasto)"></div>
+        <div id="logo_ouka" title="Yhteistyössä Oulun kaupunki (www.ouka.fi)"></div>
+        <div class="logo-break"></div>
+    </div>
+    <!-- BUTTONS -->
+    <div id="buttons">
+        <div id="button_ubi" onclick="loadUbiChannel()" title="Siirry täältä takaisin perusnäkymään"></div>
+        <div id="button_close" class="main" title="Palaa kirjaston päänäkymään"></div>
+    </div>
+</div>
+<div id="helper" title="Katso mitä kirjoja suosittelemme juuri sinulle!" onclick="showHelper()"></div>
+<div id="clock">
+    <ul>
+        <li id="clock_hours"></li>
+        <li id="clock_point">:</li>
+        <li id="clock_min"></li>
+    </ul>
+
+</div>
+<div id="clock_date"></div>
+
+<div id="ads">
+    <iframe src="http://vm.ubi-hotspot-15.ubioulu.fi:8080/UBIChannel/" style="width: 100%;height: 100%"></iframe>
+</div>
+
+<div id="events">
+    <div id="slides">
+        <ul id="news" class="bjqs"></ul>
+    </div>
+</div>
+<!--<div onclick="mainMenu()" id="close"><img style="width: 100%" src="files/close2.png" /></div> -->
+<div id="element_container">
+<div id="element1" class="element">
+    <div class="element-min">
+        <div class="min-header ui-app-header">
+            TAPAHTUMAT
+        </div>
+        <div id="cal_next" class="min-content">
+        </div>
+    </div>
+    <div id="element1_max" class="element-max">
+        <div class="max-header ui-app-header">TAPAHTUMAT</div>
+        <div class="menu-container-small overflow">
+            <div id="calendar"></div>
+        </div>
+        <div class="main-container-small overflow">
+            <div id="calendar_menu">
+                <h3 class="ui-title">KIRJASTON TAPAHTUMAT</h3>
+                <button style="background:#0000ff" class="button button-down" name='lib_tapahtumat'
+                        onclick="loadCal($(this))">Tapahtumat
+                </button>
+                <button style="background:#ff0000" class="button button-down" name='lib_lapset'
+                        onclick="loadCal($(this))">Lapsille
+                </button>
+                <button style="background:green" class="button button-down" name='lib_kurssit'
+                        onclick="loadCal($(this))">Kurssit
+                </button>
+                <h3 class="ui-title">OULUN TAPAHTUMAT</h3>
+
+                <div class="radio">
+                    <input onclick="loadCalRadio('kaikki')" type="radio" id="kaikki" name="radio"/><label
+                        for="kaikki">Kaikki</label>
+                    <input onclick="loadCalRadio('juhla')" type="radio" id="juhla" name="radio"/><label
+                        for="juhla">Juhlatapahtumat</label>
+                    <input onclick="loadCalRadio('lapset')" type="radio" id="lapset" name="radio"/><label
+                        for="lapset">Lapsille</label>
+                    <input onclick="loadCalRadio('kurssit')" type="radio" id="kurssit" name="radio"/><label
+                        for="kurssit">Kurssit</label>
+                    <input onclick="loadCalRadio('tiede')" type="radio" id="tiede" name="radio"/><label
+                        for="tiede">Tiede ja luennot</label>
+                    <input onclick="loadCalRadio('taide')" type="radio" id="taide" name="radio"/><label
+                        for="taide">Taide ja museot</label>
+                    <input onclick="loadCalRadio('liikunta')" type="radio" id="liikunta" name="radio"/><label
+                        for="liikunta">Liikunta</label>
+                    <input onclick="loadCalRadio('elokuva')" type="radio" id="elokuva" name="radio"/><label
+                        for="elokuva">Elokuvat ja kirjallisuus</label>
+                    <input onclick="loadCalRadio('musiikki')" type="radio" id="musiikki" name="radio"/><label
+                        for="musiikki">Musiikki ja tanssi</label>
+                    <input onclick="loadCalRadio('teatteri')" type="radio" id="teatteri" name="radio"/><label
+                        for="teatteri">Teatteri</label>
+                    <input onclick="loadCalRadio('matka')" type="radio" id="matka" name="radio"/><label
+                        for="matka">Matkailijoille</label>
+                    <input onclick="loadCalRadio('muut')" type="radio" id="muut" name="radio"/><label
+                        for="muut">Muut</label>
+                    <input onclick="loadCalRadio('tyhja')" type="radio" id="tyhja" name="radio"
+                           checked="checked"/><label for="tyhja">Tyhjä</label>
+                </div>
+            </div>
+            <div id="calendar_content"></div>
+        </div>
+    </div>
+</div>
+<div class="element">
+    <div class="element-min">
+        <div class="min-header ui-app-header">
+            VINKIT
+        </div>
+        <div id="hints_min" class="min-content"></div>
+    </div>
+    <div class="element-max">
+        <div class="max-header ui-app-header">VINKIT</div>
+        <div class="menu-container-large overflow">
+            <div id="hints_menu"></div>
+        </div>
+        <div class="main-container-large overflow">
+            <div id="hints_help">
+                <div class="ui-title"><< Valitse kategoria</div>
+            </div>
+            <div id="hints_main"></div>
+        </div>
+    </div>
+</div>
+<div id="element3" class="element">
+    <div class="element-min">
+        <div class="min-header ui-app-header">
+            ETSI KIRJAA
+        </div>
+        <div id="cloud_min" class="min-content"></div>
+    </div>
+    <div class="element-max">
+        <div class="max-header ui-app-header">ETSI KIRJAA</div>
+        <div class="menu-container-large">
+            <!--<div id="cloud_progress">
+                <div id="cloud_progress_text">Hetkinen, haetaan lisää KirjaSammosta</div>
+            </div> -->
+            <div id="cloud_container">
+                <div id="vis"></div>
+            </div>
+            <p id="cloud_help">valitut hakusanat</p>
+
+            <div id="cloud_keywords" class="ui-cloud"></div>
+            <button id="cloud_clear_keywords" onclick="clearKeyWords()">Tyhjennä hakusanat</button>
+            <button id="cloud_more_keywords" onclick="loadMoreKeyWords()">Katso lisää hakusanoja</button>
+            <div id="cloud_input">
+                <textarea id="keyboard" placeholder="Hae nimellä tai hakusanalla..."></textarea>
+            </div>
+        </div>
+        <div class="main-container-large overflow">
+            <div id="cloud_main"></div>
+        </div>
+    </div>
+</div>
+<div id="element4" class="element">
+<div class="element-min">
+    <div class="min-header ui-app-header">KIRJASTO</div>
+    <div class="min-content">
+        <div class='min-title-alt'>Tutustu kirjaston palveluihin</div>
+        <img class="min-img" src="files/kirjasto.png"/>
+    </div>
+</div>
+<div class="element-max">
+<div onclick="changeMap()" class="map-hidden"></div>
+<div onclick="changeMap()" class="max-header map-header ui-app-header">PÄÄKIRJASTO</div>
+<div id="map_all_header" onclick="changeMap()" style="left: 480px"
+     class="max-header ui-app-header-down map-header ui-app-header">
+    MUUT KIRJASTOT
+</div>
+<div id="map_loc">
+    <div id="map_popup"></div>
+    <div style="overflow: hidden" class="menu-container-large">
+
+        <div id="map_up" onclick="mapSlideUp()" class="map-slider">&uarr;</div>
+        <div id="map_down" onclick="mapSlideDown()" class="map-slider" style="bottom:0px">&darr;</div>
+        <div id="map_floor_number" class="ui-title"></div>
+        <div id="map_floors">
+            <div class="map-floor" id="m3e">
+                <img class="map-img-floor" src="files/pic/3krs.jpg"/>
+
+                <div id="map_os" class="map-item"
+                     onclick="$(this).effect('highlight', {}, 1000);mapSelect('map_os')"></div>
+                <div id="map_mo" class="map-item"
+                     onclick="$(this).effect('highlight', {}, 1000);mapSelect('map_mo')"></div>
+            </div>
+            <div class="map-floor" id="m2e">
+                <img class="map-img-floor" src="files/pic/2krs.jpg"/>
+
+                <div id="map_ao" class="map-item"
+                     onclick="$(this).effect('highlight', {}, 1000);mapSelect('map_ao')"></div>
+                <div id="map_ln" class="map-item"
+                     onclick="$(this).effect('highlight', {}, 1000);mapSelect('map_ln')"></div>
+            </div>
+            <div class="map-floor" id="m1e">
+                <img class="map-img-floor" src="files/pic/1krs.jpg"/>
+
+                <div id="map_aa" class="map-item"
+                     onclick="$(this).effect('highlight', {}, 1000);mapSelect('map_aa')"></div>
+                <div id="map_ls" class="map-item"
+                     onclick="$(this).effect('highlight', {}, 1000);mapSelect('map_ls')"></div>
+                <div id="map_ub" class="map-item"
+                     onclick="$(this).effect('highlight', {}, 1000);mapSelect('map_ub')"></div>
+            </div>
+        </div>
+        <div id="map_pointer"></div>
+        <button onclick="$('#map_popup').dialog('open')" id="map_button">Hakusanat</button>
+    </div>
+    <div class="main-container-large overflow">
+        <div id="map_lib">
+        </div>
+
+    </div>
+</div>
+<div id="map_all">
+<div class="menu-container-large">
+    <div id="google_map"></div>
+    <div id="map_blocker"></div>
+</div>
+<div class="main-container-large overflow">
+<div id="map_main">
+<div onclick="goToMarker('paa')">Pääkirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/paa.jpg"/>
+    Kaarlenväylä 3, PL 15, 90100 Oulu<br>
+    city.library@ouka.fi<br>
+    <br>
+    Lainaus, uusinnat<br>
+    p. 08 558 47337<br>
+    lainaustoimisto.kirjasto@ouka.fi, ma - pe 10-20, la 10 -15, aatot 10 - 17<br>
+    <br>
+    Lehtisali<br>
+    p. 08 558 47347<br>
+    lehtisali.kirjasto@ouka.fi, ma - pe 9 - 20, la 10 - 15, su 12 - 16, aatot 9 - 17<br>
+    <br>
+    Tietopalvelu<br>
+    p. 08 558 47339<br>
+    tietopalvelu.kirjasto@ouka.fi, ma - pe 10 - 20, la 10 - 15, aatot 10 - 17<br>
+    <br>
+    Lasten ja nuorten osasto<br>
+    p. 08 558 47342<br>
+    lastenosasto.kirjasto@ouka.fi, ma - pe 10-20, la 10 - 15, aatot 10 – 17<br>
+    <br>
+    Musiikkiosasto<br>
+    p. 08 558 47352<br>
+    musiikki.kirjasto@ouka.fi, ma - pe 10 - 20, la 10 - 15, aatot 10 - 17<br>
+    <br>
+    Opintosali Kässy<br>
+    p. 08 558 47321<br>
+    kasikirjasto@ouka.fi, ma - pe 9 - 20, la 10 - 15, su 12 - 16, aatot 9 - 17
+</div>
+<div onclick="goToMarker('as')">Aseman kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/as.png"/>
+    Avoinna ti 9 - 16, to 9 - 15, heinäkuussa ja koulujen loma-aikoina suljettu<br>
+    <br>
+    Sijainti Aseman koulun yhteydessä<br>
+    Asemakylänraitti 1, A-talo, 90840 Haukipudas<br>
+    P. 050 410 1318, asema.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('ha')">Haukiputaan kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/ha.png"/>
+    Avoinna ma–to 10–20, pe 10–17, la 9–15<br>
+    <br>
+    Jokelantie 1, 90830 Haukipudas<br>
+    P. 040 519 0655, haukipudas.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('ja')">Jäälin kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/ja.png"/>
+    Avoinna ma, ti, to 12 - 19, ke ja pe 10 - 15<br>
+    <br>
+    Kirjasto sijaitsee Jäälin ostoskeskuksessa.<br>
+    Keskuspisto 3, talo 2 LH 5, 90940 Jääli<br>
+    P. 044 499 3131, jaali.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('ka')">Kaakkurin kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/as.png"/>
+    Avoinna ma-to 11-19, pe 11-17<br>
+    <br>
+    Sijaitsee Kaakkurin monitoimitalossa.<br>
+    Pesätie 13, 90420 Oulu<br>
+    P. 08 558 47410, kaakkuri.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('kai')">Kaijonharjun kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/kai.jpg"/>
+    Avoinna ma - to 12 - 19, pe 11 - 17<br>
+    <br>
+    Kalevalantie 5, 90570 Oulu<br>
+    P. 08 558 47400, kaijonharju.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('kar')">Karjasillan kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/kar.png"/>
+    Avoinna ma-to 12-19, pe 11-17<br>
+    <br>
+    Kirjasto sijaitsee Pohjankartanossa.<br>
+    Kollaantie 2, 90140 Oulu<br>
+    P. 08 558 47403, karjasilta.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('kau')">Kaukovainion kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/kau.jpg"/>
+    Avoinna ma - to 12 - 19, pe 11 - 17<br>
+    <br>
+    Kirjasto sijaitsee Kaukovainion koulun yhteydessä.<br>
+    Hiirihaukantie 4, 90250 Oulu<br>
+    P. 08 558 47 405, kaukovainio.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('ke')">Kellon kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/ke.png"/>
+    Avoinna ma-ti ja to 13-19, ke ja pe 10-15.<br>
+    Aattoina suljetaan klo 15.)<br>
+    <br>
+    Nuorisoseurantalo<br>
+    Kellontie 272, 90820 Kello<br>
+    P. 050 410 3703, kello.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('ki')">Kiimingin kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/ki.gif"/>
+    Avoinna:<br>
+    Lehtisali: ma - to 10 - 20, pe 10 - 18, la 10 - 16, aatot 11 - 17<br>
+    Muut kirjastotilat: ma - to 12 - 20, pe 10 - 18, la 10 - 16, aatot 11 -17<br>
+    <br>
+    Kirjastokuja 1, 90900 Kiiminki<br>
+    P. 0400 240 641, kiiminki.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('ko')">Koskelan kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/ko.gif"/>
+    Avoinna ma - ke 12 -19, to - pe 11 - 17<br>
+    <br>
+    Tullimiehentie 4, 90560 OULU<br>
+    P. 08 558 47407, koskela.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('ma')">Maikkulan kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/ma.gif"/>
+    Avoinna ma - to 11 - 19, pe 11 - 17<br>
+    <br>
+    Kangaskontiontie 3, 90240 Oulu<br>
+    P. 08 558 67411, maikkula.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('mar')">Martinniemen kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/mar.gif"/>
+    Avoinna ma ja ke 13 - 19, to ja pe 10 - 15, suljettu koulujen loma-aikoina<br>
+    <br>
+    Sijainti Martinniemen koulun yhteydessä<br>
+    Jokisuuntie 1, 90850 Martinniemi<br>
+    P. 050 410 4183, martinniemi.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('my')">Myllyojan kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/my.png"/>
+    Avoinna ma - to 11 - 19, pe 11 - 17<br>
+    <br>
+    Sijainti Myllyojan ostoskeskuksen läheisyydessä samassa rakennuksessa nuorisotilojen kanssa.<br>
+    Karvarinaukio 11, 90650 Oulu<br>
+    P. 08 558 47413, myllyoja.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('ou')">Oulunsalon aluekirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/ou.gif"/>
+    Avoinna ma - pe 11 - 19, la 9 - 15, aatot 11 - 17<br>
+    Lehtisali avataan arkena klo 8<br>
+    <br>
+    Sijainti kauppakeskus Kapteenin yhteydessä<br>
+    Karhuojantie 2, 90460 Oulunsalo<br>
+    P. 050 388 7002, oulunsalo.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('pa')">Pateniemen kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/pa.gif"/>
+    Avoinna ma-ti 12-19, ke 11-17, to-pe 10-15, suljettu koulujen loma-aikoina ja kesällä heinäkuun.<br>
+    <br>
+    Sahantie 2, 90800 Oulu<br>
+    P. 08 558 67418, pateniemi.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('pu')">Puolivälinkankaan kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/pu.gif"/>
+    Avoinna ma - ke 12 - 19, to - pe 9 - 15<br>
+    <br>
+    Mielikintie 1, 90550 Oulu<br>
+    P. 08 55847420, puolivalinkangas.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('ra')">Rajakylän kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/ra.jpg"/>
+    Avoinna:<br>
+    Lehtisali Aviisi ma - to 10 - 19, pe 10 - 17<br>
+    Muut kirjastotilat ma - to 12 - 19, pe 11 - 17<br>
+    <br>
+    Sijainti Rajakylän Hoivan yhteydessä.<br>
+    Ruiskukkatie 2, 90580 Oulu<br>
+    P. 08 558 47422, rajakyla.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('ri')">Ritaharjun kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/ri.jpg"/>
+    Avoinna ma - ti 12 - 19, ke 9 - 15, to - pe 11 - 17.<br>
+    Suljettu koulujen loma-aikoina ja kesällä heinäkuun.<br>
+    <br>
+    Sijainti Ritaharjun monitoimitalossa.<br>
+    Ritakierros 2, 90540 Oulu<br>
+    P. 044 703 7338, ritaharju.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('tu')">Tuiran kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/tu.gif"/>
+    Avoinna ma-ke 12-19, to-pe 9-15<br>
+    <br>
+    Sijainti Tuiran torilla<br>
+    Valtatie 47, 90500 Oulu<br>
+    P. 08 55847424, tuira.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('yi')">Yli-Iin kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/yi.jpg"/>
+    Avoinna ma, ke-to 13-19, ti ja pe 12-16.<br>
+    Aattoina suljetaan klo 15.<br>
+    <br>
+    Halametsä 1, 91200 Yli-Ii<br>
+    P. 08 558 58237, yli-ii.kirjasto@ouka.fi
+</div>
+<div onclick="goToMarker('yk')">Ylikiimingin kirjasto</div>
+<div>
+    <img class="map-img" src="files/pic/yk.png"/>
+    Avoinna ma - ke 12 - 19, to - pe 9 - 15<br>
+    <br>
+    Kirjasto sijaitsee Ylikiimingin koulun yhteydessä.<br>
+    Koulurinne 3, 91300 Ylikiiminki<br>
+    P. 08 5587 0656, ylikiiminki.kirjasto@ouka.fi
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="element">
+    <div class="element-min">
+        <div class="min-header ui-app-header">PALAUTE</div>
+        <div class="min-content">
+            <div class='min-title-alt'>Kerro mielipiteesi</div>
+            <img style="border: 0px" class="min-img" src="files/thumb.png"/>
+        </div>
+    </div>
+    <div id="feedback_main" class="element-max">
+        <div class="ui-app-header max-header">PALAUTE</div>
+        <div id="feedback_form">
+            <div class="menu-container-small overflow">
+                <h3 class="ui-title">Huom! Voit täyttää haluamasi osat palautteesta</h3>
+
+                <div id="feedback_questions"></div>
+            </div>
+            <div class="main-container-small">
+                <div id="feedback_free">
+                    <div>
+                        <h3 class="ui-title">Lähetä palautetta kirjaston palveluista:</h3>
+                        <input type="text" class="feedback-input">
+                    </div>
+                    <div>
+                        <h3 class="ui-title">Lähetä palautetta tämän Ubi-näytön sovelluksista:</h3>
+                        <input type="text" class="feedback-input">
+                    </div>
+                </div>
+                <button onclick="feedback()">Lähetä!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+</div>
+<script type="text/javascript" src="scripts/cloud.js"></script>
+</body>
+</html>

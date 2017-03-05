@@ -1,0 +1,38 @@
+#clock {
+    bottom:25px;
+    left:100px;
+    position: absolute;
+    width: 200px;
+    color: #f5f5f5;
+}
+
+#clock_date {
+    color: #f5f5f5;
+    position: absolute;
+    left:350px;
+    bottom:40px;
+    font-size: 20px;
+    text-align: center;
+    text-shadow: 0 0 5px;
+}
+
+#clock ul {
+    margin: 0 auto;
+    padding: 0px;
+    list-style: none;
+    text-align: center;
+}
+
+#clock ul li {
+    display: inline;
+    font-size: 60px;
+    text-align: center;
+    font-family: 'BebasNeueRegular', Arial, Helvetica, sans-serif;
+    text-shadow: 0 0 5px;
+}
+
+#clock_point {
+    position: relative;
+    padding-left: 10px;
+    padding-right: 10px;
+}

@@ -1,0 +1,130 @@
+{
+    "Musiikkiosasto": {
+        "name":"Musiikkiosasto",
+        "sid": "map_mo",
+        "desc": "ma - pe 10 - 20, la 10 - 15, aatot 10 - 17 <br>p. 08 558 47352 / musiikki.kirjasto@ouka.fi<br><br>Laaja kokoelma musiikkikirjoja, nuotteja, musiikkilehtiä, cd-, lp-, dvd- ja blu-ray-levyjä. Osastolla mahdollisuus kuunnella musiikkia, soittaa pianoa, pelata PS3-pelejä ja digitoida vhs-videokasetteja dvd-levylle sekä c-kasetteja ja vinyylilevyjä cd-levylle. Osastolla on kolme tietokonetta.",
+        "floor": "3",
+        "img": "files/pic/p_mo.jpg",
+        "recommend": ["TEEN", "YOUNGADULT", "ADULT"],
+        "cat": {
+            "CD-levyt": [ "", [275, 180] ],
+            "Digitointi": [ "Äänitedigitointia itsepalveluna:[ Siirrä C-kasetin tai vinyylievyn sisältö CD-levylle. Lisätietoja:[ http:[//www.ouka.fi/oulu/kirjasto/aanitteiden-digitointi1 . Videodigitointia itsepalveluna:[ Siirrä VHS-videokasetin sisältö DVD-levylle. Lisätietoja:[ http:[//www.ouka.fi/oulu/kirjasto/digitointi", [340, 155] ],
+            "Levyjen kuuntelu": [ "", [310, 45] ],
+            "Musiikkikirjat": [ "", [130, 35] ],
+            "Musiikkilehdet": [ "", [315, 185] ],
+            "Nuotit": [ "", [225, 45] ],
+            "Pelit": [ "", [340, 215] ],
+            "Studio": [ "Musiikkiosaston studiossa voit kuunnella musiikkia CD:ltä tai LP:ltä, katsella DVD- ja blu-ray-tallenteita, harjoitella pianonsoittoa (Yamaha Clavinova) tai pelata Playstation3-konsolipeliä.", [60, 240] ]
+        }
+    },
+    "Opintosali Kässy ja maakuntakokoelma": {
+        "name": "Opintosali Kässy ja maakuntakokoelma",
+        "sid": "map_os",
+        "desc": "ma - pe 9 - 20, la 10 - 15, su 12 - 16 (kiinni sunnuntaisin 16.6.–11.8.), aatot 9 - 17<br>p. 08 558 47321 / kasikirjasto@ouka.fi<br><br>Hiljaista opiskelu- ja työskentelytilaa, aikakauslehtien ja e-kirjan lukulaitteiden lainaus, mikrofilminlukulaite, mikrofilmiskanneri ja kopiokone.",
+        "floor": "3",
+        "img": "files/pic/p_mk.jpg",
+        "recommend": ["TEEN", "YOUNGADULT", "ADULT", "SENIOR"],
+        "cat": {
+            "Kopiokone": [ "", [280, 420] ],
+            "Opintosali": [ "Lainattavia aikakauslehtiä, hakuteoksia ja sanakirjoja. Asiakkaiden käytössä 2 tietokonetta, tulostin ja kopiokone.", [255, 510] ],
+            "Maakuntakokoelma": [ "Pohjois-Pohjanmaahan liittyvää tietokirjallisuutta, lehtiä, musiikkia ja elokuvia sekä paikallisten kirjailijoiden teoksia.", [110, 335] ],
+            "Mikrofilmin lukuhuone": [ "Asiakkaiden käytössä mikrofilmiskanneri (tallennus muistitikulle ja paperitulostus) sekä mikrofilminlukulaite (paperitulostus). Vanhemmat paikallislehdet ja Helsingin Sanomat käytettävissä mikrofilmeinä.", [130, 700] ],
+            "Lukusali": [ "Lasiseinällä erotettu hiljainen lukutila. Tilaa työskentelyyn omien läppäreiden kanssa.", [265, 650] ]
+        }
+    },
+    "Lasten ja nuorten osasto": {
+        "name": "Lasten ja nuorten osasto",
+        "sid": "map_ln",
+        "desc": "ma - pe 10 - 20, la 10 - 15, aatot 10 - 17 <br>p. 08 558 47342 / lastenosasto.kirjasto@ouka.fi<br><br>Lasten- ja nuortenkirjallisuuden tietopalvelu, lukusuosituksia. Viihtyisä koko perheen oleskelupaikka. Tilaa lukea, pelata pelejä, leikkiä rooliasuilla ja pehmoleluilla. Mahdollisuus kuunnella äänisatuja. Lautapelejä lapsille ja nuorille.",
+        "floor": "2",
+        "img": "files/pic/p_lo.jpg",
+        "recommend": ["TEEN", "CHILD"],
+        "cat": {
+            "Esteetön asiakaskone": [ "Omppu-tietokoneessa on iso näppäimistö ja helppokäyttöinen hiiri. Tietokoneen ääreen pääsee myös pyörätuolilla. Koneella voi käyttää internetiä ja pelata erilaisia pelejä.", [130, 200] ],
+            "Helppolukuiset": [ "", [160, 340] ],
+            "Kuvakirjat": [ "", [60, 190] ],
+            "Lasten ja nuorten tietokirjat": [ "", [70, 430] ],
+            "Lastenmusiikki": [ "", [110, 180] ],
+            "Lastenrunot": [ "", [80, 290] ],
+            "Lasten äänikirjat": [ "", [175, 175] ],
+            "Nuortenkirjat": [ "", [95, 350] ],
+            "Nuorten nurkkaus": [ "Paikka sinulle nuori, joka haluat lukea lehtiä, kirjoja tai sarjakuvia. Voit myös pelata lautapelejä, tavata kavereita, opiskella tai käydä katsomassa vaihtuvia kirjanäyttelyitä. Mukaville sohville voit istahtaa hetkeksi rentoutumaan ja antaa ajatusten lentää!", [145, 455] ],
+            "Omppu-kokoelma": [ "Omppu-kokoelmassa on helppolukuisia kirjoja lapsille, nuorille ja nuorille aikuisille. Omppu-kokoelman kirjoja voi lukea kuka tahansa, mutta erityisen hyvin Omppu sopii esimerkiksi suomen kieltä opetteleville maahanmuuttajille sekä kehitysvammaisille lapsille ja nuorille.", [165, 375] ],
+            "Sarjakuvat": [ "", [125, 425] ],
+            "Satusoppi": [ "Tervetuloa Satusopen taikametsään! Satusopessa voit pukeutua rooliasuun ja olla vaikkapa prinsessa tai dinosaurus. Siellä voit myös lukea, koota palapelejä, pelata tai leikkiä pehmoleluilla. Satusoppi on perheille tarkoitettu oleskelutila, jossa pidetään syksyllä ja keväällä myös satutunteja.", [55, 110] ]
+        }
+    },
+    "Aikuisten osasto": {
+        "name":"Aikuisten osasto",
+        "sid": "map_ao",
+        "desc": "ma - pe 10 - 20, la 10 - 15, aatot 10 - 17<br>p. 08 558 47337 / lainaustoimisto.kirjasto@ouka.fi",
+        "floor": "2",
+        "img": "files/pic/p_ao.jpg",
+        "recommend": ["ADULT", "YOUNGADULT", "SENIOR"],
+        "cat": {
+            "Asianajajapäivystys": [ "", [135, 700] ],
+            "Elokuvat": [ "", [355, 25] ],
+            "Eräkirjat": [ "", [400, 300] ],
+            "Fantasia- ja sicifikirjallisuus": [ "", [400, 315] ],
+            "Isotekstiset": [ "", [400, 335] ],
+            "Jännitys- ja kauhukirjallisuus": [ "", [400, 130] ],
+            "Novellit": [ "", [400, 88] ],
+            "Näytelmät": [ "", [400, 70] ],
+            "Piazza": [ "Piazzalla pääset mukaan aikuisten osaston tapahtumiin ja voit tutustua esimerkiksi kirjaston yhteistyökumppaneiden näyttelyihin.", [445, 365] ],
+            "Pikalainat": [ "", [355, 280] ],
+            "Romaanit": [ "", [470, 35] ],
+            "Romantiikka": [ "", [400, 275]],
+            "Runot": [ "", [400, 45] ],
+            "Sarjakuvat": [ "", [470, 10] ],
+            "Selkokirjat": [ "", [390, 340] ],
+            "Sotakirjat": [ "", [400, 300] ],
+            "Tietokirjat": [ "", [360, 580] ],
+            "Tänään palautetut romaanit": [ "", [400, 180] ],
+            "Tänään palautetut tietokirjat": [ "", [400, 495] ],
+            "Uutuuspysäkki": [ "Uutuuspysäkiltä löydät valikoiman suosituimpia uusia kirjoja ja saat mahdollisuuden lukea niitä rauhallisessa tilassa. Esillä on sekä kauno- että tietokirjallisuutta. Kirjoja ei lainata kotiin.", [335, 610] ],
+            "Äänikirjat": [ "", [390, 365] ]
+        }
+    },
+    "Lehtisali": {
+        "name":"Lehtisali",
+        "sid": "map_ls",
+        "desc": "ma - pe 9 - 20, la 10 - 15, su 12 - 16, aatot 9 - 17<br>p. 08 558 47347 / lehtisali.kirjasto@ouka.fi<br><br>Noin 100 sanomalehteä ja vajaa 700 aikakauslehteä 14 kielellä, yli 2000 sanomalehteä digitaalisessa muodossa. Asiakkaiden käytössä 10 tietokonetta, tulostin, skanneri ja kopiokone. Jaossa Oulun karttoja ja tapahtumien esitteitä.",
+        "floor": "1",
+        "img": "files/pic/p_ls.jpg",
+        "recommend": ["ADULT", "SENIOR"],
+        "cat": {
+            "Aikakauslehdet": [ "", [110, 460] ],
+            "Kopiokone": [ "", [232, 454] ],
+            "Tapahtumat ja matkailu": [ "", [130, 240] ],
+            "Sanomalehdet": [ "", [40, 500] ],
+            "TV": [ "", [170, 590] ],
+            "Asiakaspäätteet": [ "", [140, 344] ]
+        }
+    },
+    "Ala-aula": {
+        "sid": "map_aa",
+        "desc": "",
+        "floor": "1",
+        "img": "files/pic/p_ka.jpg",
+        "recommend": [],
+        "cat": {
+            "Ala-aulan vitriinit": [ "Yksityiset henkilöt sekä yhteisöt ja yhdistykset voivat anoa tilaa näyttelyilleen. Vitriineistä ei peritä vuokraa. Lisätietoja kirjaston kotisivuilta http:[//www.ouka.fi/oulu/kirjasto/tilojen-varaukset", [270, 540] ],
+            "Kahvio": [ "Tarina-kahvilassa on tarjolla lounasta sekä runsaita sämpylöitä ja makeita leivonnaisia. Kahvio järjestää tarvittaessa myös kokouskahvitukset ja pienimuotoiset lounaat.", [230, 200] ],
+            "Kerhohuone": [ "Kerhohuoneessa on 25 istumapaikkaa. Tilaa voi vuokrata erilaisiin kokouksiin ja tilaisuuksiin. Tiedustelut  http:[//www.ouka.fi/oulu/kirjasto/tilojen-varaukset", [450, 530] ],
+            "Laukkusäilytys": [ "", [260, 370] ],
+            "Mikroluokka": [ "Kirjaston mikroluokassa on 12 asiakaspäätettä ja opettajan kone. Mikroluokassa järjestetään tietokoneen käytön opetusta sekä ryhmille että kaikille avoimina opetuksina. Yhdistykset voivat vuokrata tilaa. Lisätietoja opetusten aikataulusta kirjaston kotisivuilta:[ http:[//www.ouka.fi/oulu/kirjasto/kurssit-ja-opastukset", [440, 440] ],
+            "Neuvotteluhuoneet": [ "Neuvotteluhuoneita voi vuokrata erilaisiin kokouksiin ja tilaisuuksiin. Neuvotteluhuoneisiin kuljetaan ulkokautta. Kummassakin kokoushuoneessa on 12 istumapaikkaa. Tiedustelut:[http:[//www.ouka.fi/oulu/kirjasto/tilojen-varaukset", [440, 50] ],
+            "Näyttelytila": [ "Näyttelytila on kooltaan 62 m2. Se voidaan yhdistää viereiseen kerhohuoneeseen, jolloin kokonaisala on 115 m2. Yksityiset henkilöt sekä yhteisöt ja yhdistykset voivat anoa tilaa näyttelyilleen. Näyttelytilasta ei peritä vuokraa. Lisätietoja kirjaston kotisivuilta http:[//www.ouka.fi/oulu/kirjasto/tilojen-varaukset", [440, 620] ],
+            "Pakkalan sali": [ "Pakkalan salissa on 168 istumapaikkaa. Salia voi vuokrata tilan luonteeseen sopiviin kokouksiin ja tilaisuuksiin. Pakkalan salissa on mikrotietokone, video/dataprojektori, dokumenttikamera ja tussitaulu, DVD-soitin, mikrofoneja ja huonokuuloisuussilmukka. Tiedustelut  http://www.ouka.fi/oulu/kirjasto/tilojen-varaukset", [430, 230] ]
+
+        }
+    },
+    "Olet tässä": {
+        "sid": "map_ub",
+        "desc": "Ala-aulan Ubi-näyttö",
+        "floor": "1",
+        "img": "files/pic/ubi.png",
+        "recommend": [],
+        "cat": { }
+    }
+}

@@ -1,0 +1,235 @@
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<html>
+<head>
+    <title>Kirjaetsin</title>
+    <link rel="stylesheet" href="styles/cloud.css"/>
+    <link rel="stylesheet" href="styles/jquery-ui/gray/jquery.ui.all.css"/>
+    <link rel="stylesheet" href="styles/jquery-ui/orange/jquery-ui-1.9.2.custom.css"/>
+    <link rel="stylesheet" href="styles/finder.css"/>
+
+    <script type="text/javascript" src="scripts/lib/jquery/jquery-2.0.2.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/jquery/jquery-ui.js"></script>
+    <script type="text/javascript" src="scripts/lib/d3/d3.v3.min.js"></script>
+    <script type="text/javascript" src="scripts/lib/d3/d3.layout.cloud.js"></script>
+    <script type="text/javascript" src="scripts/lib/d3/highlight.min.js"></script>
+    <script type="text/javascript" src="scripts/variables.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#cloud_main").accordion(vars.accordion_settings);
+            $("#progress").progressbar({});
+            $("#cloud_progress").progressbar({});
+            $('#reviews').dialog(vars.review_dialog);
+            $('#popup').dialog(vars.popup_dialog);
+            vars.popup_dialog['width'] = 700;
+            $('#popup2').dialog(vars.popup_dialog);
+            $('button').button();
+        });
+
+
+        function createBookEntity(parent, value, cat) {
+            var st = "", ic = "", img = "", but = "", but2 = "", but3 = "", abs = value['abstract'];
+            if (cat)
+                st = ' style="display:none"';
+            if (value['book_id'])
+                but3 = '<button name="' + value['book_id'] + '" onclick="getAvailable($(this))" class="book-button">Saatavuus</button>';
+            if (value['location'])
+                but2 = '<button onclick="showMap()" class="book-button">' + value['location'] + '</button>';
+            if (value['picture'])
+                img = '<img class="book-img" src="' + value['picture'] + '"></img>';
+            else
+                img = '<img class="book-img" src="files/np.png"></img>';
+            if (value['rating']) {
+                var r = Math.round(parseFloat(value['rating']));
+                if (r > 0) {
+                    but = '<button class="book-button" name="' + value['isbn'] + '" onclick="getReviews($(this))">Arvostelut</button>';
+                    ic = '<div class="book-star-container">';
+                    for (var i = 0; i < r; i++)
+                        ic += '<img class="book-star" src="files/star.png"/>';
+                    ic += '</div>';
+                }
+            }
+            $('<div' + st + ' class="book-header' + cat + '">' + img +
+                    '<div class="book-title">' + value['name'] + ' : ' + value['author_fn'] + ' ' + value['author_sn'] + '</div>' + ic +
+                    '</div>').appendTo(parent);
+            if (value['picture'])
+                img = '<img class="book-img-large" src="' + value['picture'] + '"></img>';
+            $('<div' + st + ' class="book-content' + cat + '">' +
+                    '<div class="book-abstract">' + abs +
+                    '<div>' + value['length'] + " " + value['language'] + '</div>' + '</div>' +
+                    img + '<br>' + but + but2 + but3 +
+                    '</div>').appendTo(parent);
+
+            $(parent).find('button').button();
+
+        }
+
+
+        function createSmallBookEntity(value, parent) {
+            var ic = "", img = "";
+            if (!value['picture'])
+                return false;
+            else
+                img = '<img class="min-img" src="' + value['picture'] + '"></img>';
+            if (!value['rating']) {
+                return false
+            } else {
+                var r = Math.round(parseFloat(value['rating']));
+                if (r > 0) {
+                    ic = '<div class="min-star-container">';
+                    for (var i = 0; i < r; i++)
+                        ic += '<img class="book-star" src="files/star.png"/>';
+                    ic += '</div>';
+                }
+            }
+            $(img +
+                    '<div class="min-title">' + value['name'] + ' <br> ' + value['author_fn'] + ' ' + value['author_sn'] + '</div>' + ic
+            ).appendTo(parent);
+                                             return true;
+        }
+
+        function getAvailable($e) {
+            var url = 'services/available.php?id=' + $e.attr('name');
+            showProgress('#container', 500, 20);
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType: 'json',
+                contentType: 'application/json',
+                timeout: 30000,
+                cache: false,
+                error: function (data) {
+                    hideProgress();
+                    showMessage('Tietoja ei saatavilla');
+                    console.log(data.statusText);
+                },
+                success: function (data) {
+                    hideProgress();
+                    showBigMessage('<div class="inline">' +
+                            '<p>Saatavilla pääkirjastossa: ' + data['lib_av'] + ' / ' + (parseInt(data['lib_na']) + parseInt(data['lib_av'])) + '</p>' +
+                            '<p>Saatavilla Oulun kirjastoissa: ' + data['tot_av'] + ' / ' + (parseInt(data['tot_na']) + parseInt(data['tot_av'])) + '</p>' +
+                            '<p>Varauksia: ' + data['tot_lo'] + '</p>' + '<br>' +
+                            '<p>Varaa kirja puhelimella</p>' +
+                            '<p>lukemalla oheinen QR-koodi</p>' +
+                            '</div>' +
+                            '<div class="inline-right">' +
+                            '<div><img class="qr-image" src="data/qr.png" /></div>' +
+                            '</div>');
+                }
+            });
+        }
+
+        function getReviews($e) {
+            showProgress('#container', 500, 20);
+            var url = 'services/reviews.php?isbn=' + $e.attr('name');
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType: 'json',
+                contentType: 'application/json',
+                timeout: 10000,
+                cache: false,
+                error: function (data) {
+                    hideProgress();
+                    showMessage('Tietoja ei saatavilla');
+                    console.log(data.responseText);
+                },
+                success: function (data) {
+                    hideProgress();
+                    $('#reviews').empty();
+                    var parsed = $(data['reviews_widget']);
+                    $('#reviews').append(parsed);
+                    $('#reviews').append('<div class="popup-blocker"></div>');
+                    $('#goodreads-widget').css('width', 'auto');
+                    $("#the_iframe").css('width', window.innerWidth - 520);
+                    $('#reviews').dialog('open');
+                    $('#goodreads-widget').css('width', 'auto');
+                    $('#goodreads-widget a').remove();
+
+                    $("#the_iframe").load(function () {
+                        //  $("#the_iframe").off('click');//.find('.gr_reviews_showing').hide();
+                        //  $('#the_iframe').contents().find('a').click(function (event) {
+                        //      alert("demo only");
+                        //      event.preventDefault();
+                    });
+                }
+            });
+
+        }
+
+        function showMessage(message) {
+            var popup = $('#popup');
+            popup.dialog('close');
+            popup.empty();
+            popup.append('<div>' + message + '</div>');
+            popup.dialog('open');
+        }
+
+        function showBigMessage(message) {
+            var popup = $('#popup2');
+            popup.dialog('close');
+            popup.empty();
+            popup.append('<div>' + message + '</div>');
+            popup.dialog('open');
+        }
+
+        function showProgress(location, w, h) {
+            var progress = $('#progress');
+            progress.css({height: h, width: w, left: vars.canvas_width / 2 - w / 2})
+            /*   progress.position({
+             my: 'center',
+             at: 'center',
+             of: location
+             });*/
+            progress.fadeIn(1000);
+            progress.progressbar("value", 0);
+            cloudProgressPid = setInterval(function () {
+                updateProgress()
+            }, 100);
+        }
+
+        function hideProgress() {
+            clearInterval(cloudProgressPid);
+            var progress = $('#progress')
+            progress.fadeOut(500);
+            progress.progressbar("value", 0);
+        }
+
+        function updateProgress() {
+            var progress = $('#progress');
+            var val = progress.progressbar("value") || 0;
+            progress.progressbar("value", val + 1);
+            if (val > 99) {
+                progress.progressbar("value", 0);
+            }
+        }
+    </script>
+</head>
+<body>
+
+<div id="popup_big"></div>
+<div id="popup_small"></div>
+<div id="reviews"></div>
+<div id="progress"></div>
+
+<div id="container">
+    <div class="menu-container-large">
+        <div id="cloud_progress">
+            <div class="progress-label"></div>
+        </div>
+        <div id="cloud_container">
+            <div id="vis"></div>
+        </div>
+        <div id="cloud_keywords"></div>
+        <button id="cloud_more_keywords" onclick="loadMoreKeyWords()">Lisää sanoja</button>
+        <div id="cloud_input">
+            <textarea id="keyboard" placeholder="Syötä hakusana..."></textarea>
+        </div>
+        <button id="cloud_more" onclick="load($('#keyboard').val());$('#keyboard').val('')">Hae</button>
+    </div>
+    <div class="main-container-large overflow">
+        <div id="cloud_main"></div>
+    </div>
+</div>
+<script type="text/javascript" src="scripts/cloud.js"></script>
+</body>
+</html>

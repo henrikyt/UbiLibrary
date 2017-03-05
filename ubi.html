@@ -1,0 +1,22 @@
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+<html>
+<head>
+    <link rel="stylesheet" href="styles/services.css"/>
+    <title>Kirjaston UBIn hallintapaneeli</title>
+    <script type="text/javascript">
+        function doPost() {
+            if (confirm('Haluatko varmasti poistaa kaikki palautteen vastaukset?')) {
+                window.location.href='services/feedback.php?remove';
+            }
+        }
+    </script>
+</head>
+<body>
+<h3>UBIn hallintapaneeli</h3>
+<br>
+<a href="services/ubinews.php"><h1>Tiedotteiden hallinta</h1></a>
+<a href="services/ubiquestions.php"><h1>Palautekyselyn hallinta</h1></a>
+<a href="services/feedback.txt"><h1>Palautteen tulokset</h1></a>
+<a onclick="doPost()" href="#"><h1>Tyhjennä tulokset</h1></a>
+</body>
+</html>

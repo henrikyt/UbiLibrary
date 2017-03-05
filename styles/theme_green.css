@@ -1,0 +1,89 @@
+body {
+    background: transparent;
+    font-family: sans-serif;
+    font-size: 12px;
+}
+
+#bg_full {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(98, 126, 114);
+    z-index: -2;
+}
+
+#bg {
+    position: absolute;
+    background-image: url("../files/bg_green.png");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    opacity: 0.05;
+    width: 100%;
+    height: 100%;
+}
+
+.ui-app-header {
+    color: white;
+    background-color: rgb(189, 191, 133);
+}
+
+.ui-cloud {
+    background-color: rgba(189, 191, 133, 0.05);
+}
+
+.ui-app-header-down {
+    background-color: rgb(79, 81, 56) !important;
+}
+
+.ui-title {
+    color: rgb(189, 191, 133);
+}
+
+.ui-news-title {
+    color: white;
+    background-color: rgb(189, 191, 133)
+}
+
+.fc-header-title {
+    color: rgb(189, 191, 133) !important;
+}
+
+#button_close {
+    background-image: url("../files/logo/Home.png");
+}
+
+#button_ubi {
+    background-image: url("../files/logo/ubi.png");
+    opacity: 0.9;
+}
+
+#logo_gr {
+    background-image: url("../files/logo/goodreads.png");
+}
+
+#logo_gb {
+    background-image: url("../files/logo/google.png");
+}
+
+#logo_ouka {
+    background-image: url("../files/logo/oulu.png");
+    width: 100px !important;
+}
+
+#logo_sampo {
+    background-image: url("../files/logo/kirjasampo_v.png");
+}
+
+#logo_outi {
+    background-image: url("../files/logo/outi.png");
+}
+
+
+#logo_ubi{
+    background-image: url("../files/logo/ubi.png");
+}
+
+.logo-break {
+    background-image: url("../files/logo/break.png");
+    background-size: 10 50 !important;
+}
